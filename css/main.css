@@ -26,13 +26,10 @@ h2 {
     letter-spacing: 2px;
     text-align: center;
 }
- /* div {
-    border: 1px solid red
-} */
 
 #letters {
     display: grid;
-    grid-template-rows: /repeat(27, 1min);
+    grid-template-rows: repeat(27, 1min);
     gap: 1vmin;
 }
 
