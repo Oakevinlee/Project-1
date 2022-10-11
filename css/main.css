@@ -21,16 +21,18 @@ h1 {
     text-align: center;
     }
 
-h2 {font-size: 2vmin;
-    float: inline-end
+h2 {
+    font-size: 2vmin;
+    letter-spacing: 2px;
+    text-align: center;
 }
- div {
+ /* div {
     border: 1px solid red
-}
+} */
 
 #letters {
     display: grid;
-    grid-template-rows: repeat(27, 1min);
+    grid-template-rows: /repeat(27, 1min);
     gap: 1vmin;
 }
 
@@ -41,12 +43,39 @@ h2 {font-size: 2vmin;
 }
 
 button {
-    margin: 1vmin;
-    border: none;
-    gap: 50px;
+    margin: 2 0.5vmin;
+    width: 3vw;
+    border-radius: 20%;
 }
 .guessLeft {
         display: flex;
         justify-content: flex-end;
     
+}
+
+.guessWord {
+    font-size: 2vmin;
+    letter-spacing: 2px;
+    text-align: center;
+
+}
+
+.p-button {
+    margin: 2 0.5vmin;
+    width: 5vw;
+    border-radius: 20%;
+    
+}
+
+.container > div:last-child {
+    justify-content: center;
+    display: flex;
+}
+
+class.correct {
+    background-color: green;
+}
+
+class.wrong {
+    background-color: red;
 }
