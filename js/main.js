@@ -4,7 +4,11 @@ const wordBank = [
     'space',
     'stars',
     'sun',
-    'nova'
+    'nova',
+    'asteroid',
+    'juputer',
+    'deathstar'
+
 
 ];
 
@@ -39,6 +43,7 @@ function init() {
   guess = answer.map(ltr => ltr === ' ' ? ' ' : '_')
   gameStatus = null;
   render()
+  // document.getElementById('picId').src="./img/spaceman-images/spaceman-1.jpg"
 } 
 
 function render() {
@@ -52,8 +57,10 @@ function renderMessage() {
     msgEl.textContent = `Winner winner chicken dinner`;
    } else if (gameStatus === 'L') {
     msgEl.textContent = `Try again`;
+    document.getElementById('picId').src="./img/spaceman-images/spaceman-1.jpg"
    } else {
     msgEl.textContent = `${maxWrongGuess - wrongGuess.length + 1} wrong guesses remain, good luck`;
+    // document.getElementById('picId').src="./img/spaceman-images/spaceman-1.jpg"
    }
 }
 

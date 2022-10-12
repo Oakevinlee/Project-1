@@ -18,24 +18,21 @@ body {
 
 h1 {
     font-size: 50px;
-    color: gray;
+    color: whitesmoke;
     letter-spacing: 1vmin;
     text-align: center;
     }
 
 h2 {
     font-size: 2vmin;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-align: center;
+    color: white
 }
 
 #letters {
-    display: grid;
     grid-template-rows: repeat(27, 1min);
     gap: 1vmin;
-}
-
-#letters {
     height: 5vmin;
     display: flex;
     justify-content: center;
@@ -53,16 +50,19 @@ button {
 }
 
 .guessWord {
-    font-size: 2vmin;
-    letter-spacing: 2px;
+    font-size:  75px;
+    letter-spacing: 15px;
     text-align: center;
+    font-family: initial;
+    color: aliceblue;
+    
 
 }
 
 .p-button {
     margin: 2 0.5vmin;
     width: 5vw;
-    border-radius: 20%;
+    border-radius: 50%;
     
 }
 
@@ -76,5 +76,17 @@ button {
 }
 
 .wrong {
+    background-color: red;
+}
+
+.message {
+    float: right;
+}
+
+.pic {
+    width: 25vmin;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     background-color: red;
 }
