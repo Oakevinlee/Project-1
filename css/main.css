@@ -11,6 +11,8 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-image: url('https://wallpaperaccess.com/full/17068.jpg');
+    background-size: cover;
 
 }
 
