@@ -6,8 +6,9 @@ const wordBank = [
     'sun',
     'nova',
     'asteroid',
-    'juputer',
+    'jupiter',
     'deathstar'
+  
 
 
 ];
