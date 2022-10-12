@@ -96,3 +96,7 @@ img {
     margin-right: auto;
     background-color: red;
 }
+
+.hide {
+    display: none;
+}

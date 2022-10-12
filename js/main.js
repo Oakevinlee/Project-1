@@ -7,7 +7,9 @@ const wordBank = [
     'nova',
     'asteroid',
     'jupiter',
-    'deathstar'
+    'deathstar',
+    'venus',
+    
 
   ];
 
@@ -36,6 +38,7 @@ init()
 
 function init() {
   wrongGuess = [];
+  spacemanEl.classList.remove('hide')
   const randomIdx = Math.floor(Math.random() * wordBank.length);
   console.log(answer);
   answer = wordBank[randomIdx].toUpperCase().split('')
@@ -51,7 +54,11 @@ function render() {
   guessEl.textContent = guess.join('')
   renderButton()
   console.log(wrongGuess.length)
-  spacemanEl.src = `img/spaceman-images/spaceman-${wrongGuess.length}.jpg`;
+  if (wrongGuess.length < 6) {
+    spacemanEl.src = `img/spaceman-images/spaceman-${wrongGuess.length}.jpg`;
+  } else if(wrongGuess.length === 6) {
+    spacemanEl.classList.add('hide')
+  }
 }
 
 function renderMessage() {
