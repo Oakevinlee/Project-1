@@ -39,18 +39,18 @@ h2 {
 }
 
 button {
-    margin: 2 0.5vmin;
+    margin: .2vmin;
     width: 3vw;
     border-radius: 20%;
 }
 .guessLeft {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
     
 }
 
 .guessWord {
-    font-size:  75px;
+    font-size:  5vmin;
     letter-spacing: 15px;
     text-align: center;
     font-family: initial;
@@ -72,7 +72,7 @@ button {
 }
 
 .correct {
-    background-color: green;
+    background-color: blue;
 }
 
 .wrong {
@@ -80,12 +80,18 @@ button {
 }
 
 .message {
-    float: right;
+    display: flex;
+    justify-content: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    color: azure; 
+
 }
 
-.pic {
-    width: 25vmin;
-    display: block;
+img {
+    width: 20vmin;
+    display: flex;
+    justify-content: center;
     margin-left: auto;
     margin-right: auto;
     background-color: red;
