@@ -8,12 +8,12 @@ const wordBank = [
 
 ];
 
-const maxWrongGuess = 6;
+const maxWrongGuess = 5;
 
   /*----- state variables -----*/
 let answer;
 let guess;
-let gameStatus;
+let gameStatus; //null, w,l
 let wrongGuess;
 
   /*----- cached elements  -----*/
@@ -23,7 +23,7 @@ const guessEl = document.querySelector('.guessWord');
 const letterBtn = [...document.querySelectorAll('article > button')]
 
   /*----- event listeners -----*/
-// document.querySelector('article').addEventListener('click', handleChoice);
+document.querySelector('article').addEventListener('click', handleChoice);
 playButton.addEventListener('click', init);
   /*----- functions -----*/
 
@@ -31,7 +31,7 @@ playButton.addEventListener('click', init);
 init()
 
 function init() {
-  wrongGuesses = []
+  wrongGuess = [];
   const randomIdx = Math.floor(Math.random() * wordBank.length);
   console.log(answer);
   answer = wordBank[randomIdx].toUpperCase().split('')
@@ -44,62 +44,59 @@ function init() {
 function render() {
   renderMessage()
   guessEl.textContent = guess.join('')
+  renderButton()
 }
 
 function renderMessage() {
   if (gameStatus === 'W') {
-    msgEL.textContent = `Winner winner chicken dinner`;
+    msgEl.textContent = `Winner winner chicken dinner`;
    } else if (gameStatus === 'L') {
-    msgEL.textContent = `Try again`;
+    msgEl.textContent = `Try again`;
    } else {
-    msgEl.textContent = `${maxWrongGuess - wrongGuesses.length}wrong guesses remain, good luck`
+    msgEl.textContent = `${maxWrongGuess - wrongGuess.length + 1} wrong guesses remain, good luck`;
    }
 }
 
+function renderButton() {
+  letterBtn.forEach(function(btn) {
+    const ltr = btn.textContent; // if wrong guesses includes ltr add a class name of wrong
+    if (wrongGuess.includes(ltr)) {
+      btn.className = 'wrong'
+    } else if (guess.includes(ltr)) {
+      btn.className = 'correct'
+    } else {
+      btn.className = '';
+    }
+  })
+  playButton.style.visibility = gameStatus ? 'visible' : 'hidden'
+}
 
-// function renderButton() {
-//   letterBtn.forEach(function(button){
-//     const ltr = btn.textContent; // if wrong guesses includes ltr add a class name of wrong
-//     if (wrongGuesses.includes(ltr)) {
-//       button.className = 'wrong'
-//     } else if (guess.includes(ltr)) {
-//       button.className = 'correct'
-//     } else {
-//       button.className = '';
-//     }
-//   })
-//   playButton.style.visibility = gameStatus ? 'visible' : 'hidden'
-// }
+function handleChoice(evt) {
+  const ltr = evt.target.textContent
+  if (   //guard
+    gameStatus ||
+    !letterBtn.includes(evt.target) ||
+    wrongGuess.includes(ltr) ||
+    guess.includes(ltr)
+  ) return;
 
+ if (answer.includes(ltr)) {
+  //CORRECT GUESS
+  answer.forEach(function(char, idx){
+    if (char === ltr) guess[idx] = ltr
+  });
+} else {
+  wrongGuess.push(ltr)
+}
 
+gameStatus = getGameStatus()
+render();
 
-// function handleChoice(evt) {
-//   const ltr = event.target.textContent
-//   if (
-//     gameStatus ||
-//     !button.includes(evt.target) ||
-//     numWrongGuesses.includes(ltr) ||
-//     guesses.includes(ltr)
- 
-//   ) return;
-
-// } if (secretWord.includes(ltr)) {
-//   // correct guess
-//   randomWord.forEach(function(char, idx){
-//     if (char === ltr) guess[idx] = ltr
-//   });
-// } else {
-//   wrongGuesses.push(ltr)
-// }
-
-// gameStatus = getGameStatus()
-// render();
-
-// }
+}
  
 function getGameStatus() {
   if (!guess.includes('_')) return 'W'
-  if(wrongGuesses.length > maxWrongGuess) return 'L'
+  if(wrongGuess.length > maxWrongGuess) return 'L'
   return null;
 }
 
