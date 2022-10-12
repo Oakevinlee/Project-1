@@ -7,36 +7,37 @@ const wordBank = [
     'nova',
     'asteroid',
     'jupiter',
-    'deathstar'
-  
+    'deathstar',
+    'venus',
 
-
-];
+  ];
 
 const maxWrongGuess = 5;
 
-  /*----- state variables -----*/
+
 let answer;
-let guess;
+let guess; //
 let gameStatus; //null, w,l
 let wrongGuess;
 
-  /*----- cached elements  -----*/
+//stored El
 const msgEl = document.querySelector('.message');
 const playButton = document.getElementById('play');
 const guessEl = document.querySelector('.guessWord');
 const letterBtn = [...document.querySelectorAll('article > button')]
+const spacemanEl = document.getElementById('spaceman');
 
-  /*----- event listeners -----*/
+
 document.querySelector('article').addEventListener('click', handleChoice);
 playButton.addEventListener('click', init);
-  /*----- functions -----*/
 
-  //init all state, then render
+
+
 init()
 
 function init() {
   wrongGuess = [];
+  spacemanEl.classList.remove('hide')
   const randomIdx = Math.floor(Math.random() * wordBank.length);
   console.log(answer);
   answer = wordBank[randomIdx].toUpperCase().split('')
@@ -44,13 +45,19 @@ function init() {
   guess = answer.map(ltr => ltr === ' ' ? ' ' : '_')
   gameStatus = null;
   render()
-  // document.getElementById('picId').src="./img/spaceman-images/spaceman-1.jpg"
+
 } 
 
 function render() {
   renderMessage()
   guessEl.textContent = guess.join('')
   renderButton()
+  console.log(wrongGuess.length)
+  if (wrongGuess.length < 6) {
+    spacemanEl.src = `img/spaceman-images/spaceman-${wrongGuess.length}.jpg`;
+  } else if(wrongGuess.length === 6) {
+    spacemanEl.classList.add('hide')
+  }
 }
 
 function renderMessage() {
@@ -58,16 +65,14 @@ function renderMessage() {
     msgEl.textContent = `Winner winner chicken dinner`;
    } else if (gameStatus === 'L') {
     msgEl.textContent = `Try again`;
-    document.getElementById('picId').src="./img/spaceman-images/spaceman-1.jpg"
    } else {
-    msgEl.textContent = `${maxWrongGuess - wrongGuess.length + 1} wrong guesses remain, good luck`;
-    // document.getElementById('picId').src="./img/spaceman-images/spaceman-1.jpg"
+    msgEl.textContent = `${maxWrongGuess - wrongGuess.length + 1} guesses remain`;
    }
 }
 
 function renderButton() {
   letterBtn.forEach(function(btn) {
-    const ltr = btn.textContent; // if wrong guesses includes ltr add a class name of wrong
+    const ltr = btn.textContent;
     if (wrongGuess.includes(ltr)) {
       btn.className = 'wrong'
     } else if (guess.includes(ltr)) {
@@ -79,9 +84,9 @@ function renderButton() {
   playButton.style.visibility = gameStatus ? 'visible' : 'hidden'
 }
 
-function handleChoice(evt) {
+function handleChoice(evt) { /////// THIS IS THE GUARD /////////
   const ltr = evt.target.textContent
-  if (   //guard
+  if (   
     gameStatus ||
     !letterBtn.includes(evt.target) ||
     wrongGuess.includes(ltr) ||
@@ -89,7 +94,7 @@ function handleChoice(evt) {
   ) return;
 
  if (answer.includes(ltr)) {
-  //CORRECT GUESS
+  
   answer.forEach(function(char, idx){
     if (char === ltr) guess[idx] = ltr
   });
