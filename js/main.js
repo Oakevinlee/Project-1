@@ -1,4 +1,3 @@
-/*----- constants -----*/
 const wordBank = [
     'moon',
     'space',
@@ -16,22 +15,18 @@ const maxWrongGuess = 5;
 
 
 let answer;
-let guess; //
-let gameStatus; //null, w,l
+let guess;
+let gameStatus;
 let wrongGuess;
 
-//stored El
 const msgEl = document.querySelector('.message');
 const playButton = document.getElementById('play');
 const guessEl = document.querySelector('.guessWord');
 const letterBtn = [...document.querySelectorAll('article > button')]
 const spacemanEl = document.getElementById('spaceman');
 
-
 document.querySelector('article').addEventListener('click', handleChoice);
 playButton.addEventListener('click', init);
-
-
 
 init()
 
@@ -84,7 +79,7 @@ function renderButton() {
   playButton.style.visibility = gameStatus ? 'visible' : 'hidden'
 }
 
-function handleChoice(evt) { /////// THIS IS THE GUARD /////////
+function handleChoice(evt) { 
   const ltr = evt.target.textContent
   if (   
     gameStatus ||
@@ -97,7 +92,7 @@ function handleChoice(evt) { /////// THIS IS THE GUARD /////////
   
   answer.forEach(function(char, idx){
     if (char === ltr) guess[idx] = ltr
-  });
+  }); 
 } else {
   wrongGuess.push(ltr)
 }
@@ -112,5 +107,3 @@ function getGameStatus() {
   if(wrongGuess.length > maxWrongGuess) return 'L'
   return null;
 }
-
-// COMMENT
