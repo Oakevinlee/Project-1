@@ -1,18 +1,16 @@
 const wordBank = [
-    'moon',
-    'space',
-    'stars',
-    'sun',
-    'nova',
-    'asteroid',
-    'jupiter',
-    'deathstar',
-    'venus',
-
-  ];
+  'moon',
+  'space',
+  'stars',
+  'sun',
+  'nova',
+  'asteroid',
+  'jupiter',
+  'deathstar',
+  'venus',
+];
 
 const maxWrongGuess = 5;
-
 
 let answer;
 let guess;
@@ -40,47 +38,46 @@ function init() {
   guess = answer.map(ltr => ltr === ' ' ? ' ' : '_')
   gameStatus = null;
   render()
-
 } 
 
 function render() {
-  renderMessage()
-  guessEl.textContent = guess.join('')
-  renderButton()
-  console.log(wrongGuess.length)
+  renderMessage();
+  guessEl.textContent = guess.join('');
+  renderButton();
+  console.log(wrongGuess.length);
   if (wrongGuess.length < 6) {
     spacemanEl.src = `img/spaceman-images/spaceman-${wrongGuess.length}.jpg`;
   } else if(wrongGuess.length === 6) {
-    spacemanEl.classList.add('hide')
+    spacemanEl.classList.add('hide');
   }
 }
 
 function renderMessage() {
   if (gameStatus === 'W') {
-    msgEl.textContent = `Winner winner chicken dinner`;
+    msgEl.textContent = `Winner winner chicken dinner!`;
    } else if (gameStatus === 'L') {
     msgEl.textContent = `Try again`;
    } else {
     msgEl.textContent = `${maxWrongGuess - wrongGuess.length + 1} guesses remain`;
-   }
+  }
 }
 
 function renderButton() {
   letterBtn.forEach(function(btn) {
     const ltr = btn.textContent;
     if (wrongGuess.includes(ltr)) {
-      btn.className = 'wrong'
+      btn.className = 'wrong';
     } else if (guess.includes(ltr)) {
-      btn.className = 'correct'
+      btn.className = 'correct';
     } else {
       btn.className = '';
     }
-  })
-  playButton.style.visibility = gameStatus ? 'visible' : 'hidden'
+  });
+  playButton.style.visibility = gameStatus ? 'visible' : 'hidden';
 }
 
 function handleChoice(evt) { 
-  const ltr = evt.target.textContent
+  const ltr = evt.target.textContent;
   if (   
     gameStatus ||
     !letterBtn.includes(evt.target) ||
@@ -88,18 +85,16 @@ function handleChoice(evt) {
     guess.includes(ltr)
   ) return;
 
- if (answer.includes(ltr)) {
-  
-  answer.forEach(function(char, idx){
-    if (char === ltr) guess[idx] = ltr
-  }); 
-} else {
-  wrongGuess.push(ltr)
-}
+  if (answer.includes(ltr)) {
+    answer.forEach(function(char, idx){
+      if (char === ltr) guess[idx] = ltr
+    }); 
+  } else {
+    wrongGuess.push(ltr)
+  }
 
-gameStatus = getGameStatus()
-render();
-
+  gameStatus = getGameStatus();
+  render();
 }
  
 function getGameStatus() {
